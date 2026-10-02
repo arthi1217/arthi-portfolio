@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="cyberpunk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arthi R | AI & Machine Learning Developer Portfolio</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root, [data-theme="cyberpunk"] {
+      --bg-primary: #060812;
+      --bg-secondary: #0b0f1d;
+      --bg-card: rgba(18, 24, 43, 0.75);
+      --border-color: rgba(236, 72, 153, 0.2);
+      --border-glow: rgba(236, 72, 153, 0.55);
+      
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-muted: #64748b;
+      
+      --accent-primary: #ec4899;   /* Neon Pink */
+      --accent-secondary: #8b5cf6; /* Electric Violet */
+      --accent-cyan: #06b6d4;
+      
+      --gradient-brand: linear-gradient(135deg, #ec4899 0%, #8b5cf6 50%, #06b6d4 100%);
+      --shadow-glow: 0 0 30px rgba(236, 72, 153, 0.35);
+
+      --font-sans: 'Inter', system-ui, sans-serif;
+      --font-heading: 'Outfit', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+    }
+
+    [data-theme="emerald"] {
+      --bg-primary: #040d0a;
+      --bg-secondary: #0a1914;
+      --bg-card: rgba(16, 38, 30, 0.75);
+      --border-color: rgba(16, 185, 129, 0.25);
+      --border-glow: rgba(16, 185, 129, 0.6);
+      --text-primary: #f0fdf4;
+      --text-secondary: #a7f3d0;
+      --accent-primary: #10b981;
+      --gradient-brand: linear-gradient(135deg, #10b981 0%, #06b6d4 50%, #fbbf24 100%);
+      --shadow-glow: 0 0 30px rgba(16, 185, 129, 0.35);
+    }
+
+    [data-theme="aurora"] {
+      --bg-primary: #0b0713;
+      --bg-secondary: #140d21;
+      --bg-card: rgba(30, 18, 48, 0.75);
+      --border-color: rgba(245, 158, 11, 0.25);
+      --border-glow: rgba(245, 158, 11, 0.6);
+      --text-primary: #fff7ed;
+      --text-secondary: #fed7aa;
+      --accent-primary: #f59e0b;
+      --gradient-brand: linear-gradient(135deg, #f59e0b 0%, #ef4444 50%, #a855f7 100%);
+      --shadow-glow: 0 0 30px rgba(245, 158, 11, 0.35);
+    }
+
+    [data-theme="luxe-light"] {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #f1f5f9;
+      --bg-card: rgba(255, 255, 255, 0.9);
+      --border-color: rgba(99, 102, 241, 0.15);
+      --border-glow: rgba(99, 102, 241, 0.4);
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --accent-primary: #6366f1;
+      --gradient-brand: linear-gradient(135deg, #6366f1 0%, #ec4899 50%, #0284c7 100%);
+      --shadow-glow: 0 10px 30px rgba(99, 102, 241, 0.2);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background-color 0.35s, color 0.35s;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+    h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 800; line-height: 1.2; }
+    
+    .gradient-text {
+      background: var(--gradient-brand);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 1.5rem; }
+    .section-padding { padding: 6.5rem 0; }
+
+    .section-title-wrapper { text-align: center; margin-bottom: 3.5rem; }
+    .section-subtitle {
+      text-transform: uppercase; font-size: 0.85rem; letter-spacing: 3px;
+      font-weight: 700; color: var(--accent-primary); margin-bottom: 0.5rem; display: block;
+    }
+    .section-title { font-size: 2.8rem; font-weight: 800; letter-spacing: -0.02em; }
+
+    .glass-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.85rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-card:hover {
+      border-color: var(--border-glow);
+      transform: translateY(-5px) scale(1.01);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+      padding: 0.9rem 1.85rem; font-size: 0.95rem; font-weight: 700;
+      border-radius: var(--radius-full); transition: all 0.2s;
+    }
+    .btn-primary { background: var(--gradient-brand); color: #fff; box-shadow: 0 4px 20px rgba(236, 72, 153, 0.4); }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(236, 72, 153, 0.6); }
+    .btn-outline { background: transparent; color: var(--text-primary); border: 1px solid var(--border-color); }
+    .btn-outline:hover { border-color: var(--accent-primary); color: var(--accent-primary); background: rgba(236, 72, 153, 0.1); }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.9rem;
+      border-radius: var(--radius-full); font-size: 0.82rem; font-weight: 700;
+      background: rgba(236, 72, 153, 0.12); color: var(--accent-primary); border: 1px solid rgba(236, 72, 153, 0.3);
+    }
+
+    /* HEADER */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+      background: var(--bg-card); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-color); padding: 0.85rem 0;
+    }
+    .nav-wrapper { display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 0.6rem; font-size: 1.4rem; font-weight: 800; }
+    .logo-icon {
+      width: 38px; height: 38px; background: var(--gradient-brand);
+      display: flex; align-items: center; justify-content: center; color: #fff; border-radius: 12px;
+      box-shadow: var(--shadow-glow);
+    }
+    nav { display: flex; gap: 1.5rem; }
+    nav a { font-size: 0.88rem; font-weight: 600; color: var(--text-secondary); transition: color 0.2s; }
+    nav a:hover { color: var(--accent-primary); }
+
+    /* HERO */
+    #hero {
+      position: relative; min-height: 100vh; display: flex; align-items: center;
+      padding-top: 7rem; padding-bottom: 4rem; overflow: hidden;
+    }
+    #hero-canvas { position: absolute; inset: 0; opacity: 0.7; pointer-events: auto; }
+    .hero-grid { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 3rem; align-items: center; }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(4,6,12,0.85); backdrop-filter: blur(12px);
+      z-index: 1000; display: none; align-items: center; justify-content: center; padding: 1.5rem;
+    }
+    .modal-overlay.active { display: flex; }
+
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+    .blinking-cursor { animation: blink 1s infinite; color: var(--accent-primary); }
+
+    @media (max-width: 900px) {
+      .hero-grid, .about-grid, .sandbox-grid, .contact-grid { grid-template-columns: 1fr !important; }
+      nav { display: none; }
+      .section-title { font-size: 2.1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container nav-wrapper">
+      <a href="#" class="logo">
+        <div class="logo-icon">⚡</div>
+        <span>ARTHI<span class="gradient-text">.R</span></span>
+      </a>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#featured-projects">Featured</a>
+        <a href="#ml-projects">ML Projects</a>
+        <a href="#other-projects">Other</a>
+        <a href="#sandbox">Sandbox</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div style="display:flex; gap:0.75rem; align-items:center;">
+        <select id="theme-selector" style="padding:0.45rem 0.85rem; border-radius:var(--radius-full); border:1px solid var(--border-color); background:var(--bg-card); color:var(--text-primary); font-size:0.82rem; font-weight:700; cursor:pointer;">
+          <option value="cyberpunk">🌌 Cyberpunk</option>
+          <option value="emerald">💚 Emerald</option>
+          <option value="aurora">🌋 Aurora</option>
+          <option value="luxe-light">☀️ Luxe Light</option>
+        </select>
+        <button onclick="openModal('resume-modal')" class="btn btn-primary" style="padding:0.5rem 1.25rem; font-size:0.85rem;">View Resume</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section id="hero">
+    <canvas id="hero-canvas"></canvas>
+    <div class="container" style="position:relative; z-index:10;">
+      <div class="hero-grid">
+        <div>
+          <span class="badge" style="margin-bottom:1.5rem;">✨ Next-Gen AI & Machine Learning Specialist</span>
+          <h1 style="font-size:3.6rem; font-weight:800; margin-bottom:1rem; line-height:1.1;">
+            Hi, I'm <span class="gradient-text">Arthi R</span>
+          </h1>
+          <div style="font-size:1.4rem; font-weight:700; color:var(--accent-primary); margin-bottom:1.5rem; min-height:2rem; display:flex; align-items:center; gap:0.5rem;">
+            <span>💻</span>
+            <span id="typing-text">AI/ML Engineer & Developer</span>
+            <span class="blinking-cursor">|</span>
+          </div>
+          <p style="font-size:1.12rem; color:var(--text-secondary); margin-bottom:2.25rem; max-width:620px;">
+            Pioneering intelligent machine learning solutions, NLP pipelines, computer vision systems, and healthcare analytics architectures.
+          </p>
+          <div style="display:flex; gap:1rem; margin-bottom:2.5rem; flex-wrap:wrap;">
+            <a href="#featured-projects" class="btn btn-primary">Featured Projects →</a>
+            <a href="#sandbox" class="btn btn-outline">⚡ Test Live AI Simulator</a>
+          </div>
+          <div style="display:flex; gap:1.5rem; font-size:0.88rem; color:var(--text-muted);">
+            <span>📍 Coimbatore, Tamil Nadu, India</span>
+            <span>✅ Open for AI/ML Roles</span>
+          </div>
+        </div>
+
+        <!-- PROFILE GLOWING CARD -->
+        <div style="display:flex; justify-content:center;">
+          <div class="glass-card" style="text-align:center; max-width:390px; width:100%; border:1px solid var(--border-glow); box-shadow:var(--shadow-glow);">
+            <div style="position:relative; width:190px; height:190px; margin:0 auto 1.5rem; border-radius:50%; padding:6px; background:var(--gradient-brand); box-shadow:var(--shadow-glow);">
+              <img src="./arthi-portfolio/public/avatar.jpg" alt="Arthi R" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80'" style="width:100%; height:100%; object-fit:cover; border-radius:50%; border:3px solid var(--bg-primary);">
+            </div>
+            <h3 style="font-size:1.5rem; font-weight:800; margin-bottom:0.25rem;">Arthi R</h3>
+            <p style="font-size:0.85rem; color:var(--accent-primary); font-weight:700; margin-bottom:1.5rem;">B.Sc. Artificial Intelligence & ML</p>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; background:rgba(0,0,0,0.25); padding:1.25rem; border-radius:var(--radius-md); border:1px solid var(--border-color);">
+              <div><div style="font-size:1.4rem; font-weight:800;" class="gradient-text">6</div><div style="font-size:0.72rem; color:var(--text-muted);">Featured Projects</div></div>
+              <div><div style="font-size:1.4rem; font-weight:800;" class="gradient-text">8+</div><div style="font-size:0.72rem; color:var(--text-muted);">ML Models</div></div>
+              <div><div style="font-size:1.4rem; font-weight:800;" class="gradient-text">24</div><div style="font-size:0.72rem; color:var(--text-muted);">Certifications</div></div>
+              <div><div style="font-size:1.4rem; font-weight:800;" class="gradient-text">5</div><div style="font-size:0.72rem; color:var(--text-muted);">Internships</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO STATS COUNTER -->
+  <section id="stats" style="padding:3rem 0; background:var(--bg-secondary); border-top:1px solid var(--border-color); border-bottom:1px solid var(--border-color);">
+    <div class="container">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:1.5rem; text-align:center;">
+        <div class="glass-card" style="padding:1.25rem 1rem;">
+          <div style="font-size:2.2rem; font-weight:800;" class="gradient-text">6</div>
+          <div style="font-size:0.82rem; font-weight:700; color:var(--text-secondary);">Featured Projects</div>
+        </div>
+        <div class="glass-card" style="padding:1.25rem 1rem;">
+          <div style="font-size:2.2rem; font-weight:800;" class="gradient-text">8+</div>
+          <div style="font-size:0.82rem; font-weight:700; color:var(--text-secondary);">ML Projects</div>
+        </div>
+        <div class="glass-card" style="padding:1.25rem 1rem;">
+          <div style="font-size:2.2rem; font-weight:800;" class="gradient-text">24</div>
+          <div style="font-size:0.82rem; font-weight:700; color:var(--text-secondary);">Certifications</div>
+        </div>
+        <div class="glass-card" style="padding:1.25rem 1rem;">
+          <div style="font-size:2.2rem; font-weight:800;" class="gradient-text">5</div>
+          <div style="font-size:0.82rem; font-weight:700; color:var(--text-secondary);">Internships</div>
+        </div>
+        <div class="glass-card" style="padding:1.25rem 1rem;">
+          <div style="font-size:2.2rem; font-weight:800;" class="gradient-text">20+</div>
+          <div style="font-size:0.82rem; font-weight:700; color:var(--text-secondary);">GitHub Repos</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT & EDUCATION -->
+  <section id="about" class="section-padding">
+    <div class="container">
+      <div class="section-title-wrapper">
+        <span class="section-subtitle">Get to Know Me</span>
+        <h2 class="section-title">About & Academic Background</h2>
+      </div>
+      <div class="about-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:2.5rem;">
+        <div class="glass-card">
+          <h3 style="font-size:1.4rem; margin-bottom:1.25rem;">🧠 Career Objective</h3>
+          <p style="color:var(--text-secondary); margin-bottom:1.5rem; font-size:0.98rem; line-height:1.8;">
+            Aspiring AI/ML Developer with a strong foundation in Artificial Intelligence, Machine Learning, Deep Learning, Python, Data Science, SQL, and cloud technologies. Possessing excellent analytical thinking, problem-solving, communication, teamwork, adaptability, and leadership skills, along with a passion for continuous learning and innovation. Seeking to contribute to the development of intelligent, scalable AI solutions while delivering value to the organization.
+          </p>
+          <div style="padding-top:1.25rem; border-top:1px solid var(--border-color); display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+            <div><div style="font-size:0.8rem; color:var(--text-muted);">Focus Area</div><div style="font-size:0.95rem; font-weight:700;">AI Solutions & ML Systems</div></div>
+            <div><div style="font-size:0.8rem; color:var(--text-muted);">Location</div><div style="font-size:0.95rem; font-weight:700;">Coimbatore, Tamil Nadu</div></div>
+          </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:1.25rem;">
+          <h3 style="font-size:1.4rem; margin-bottom:0.5rem;">🎓 Academic Qualifications</h3>
+          <div class="glass-card" style="border-left:4px solid var(--accent-primary);">
+            <span class="badge" style="font-size:0.75rem; margin-bottom:0.4rem;">Undergraduation</span>
+            <h4 style="font-size:1.1rem;">B.Sc. in Artificial Intelligence & Machine Learning</h4>
+            <p style="font-size:0.88rem; color:var(--text-secondary);">Dr. N.G.P. Arts and Science College, Coimbatore</p>
+            <div style="font-size:0.85rem; color:var(--accent-primary); font-weight:700; margin-top:0.4rem;">Aggregate performance: 85% (up to Sem IV)</div>
+          </div>
+          <div class="glass-card">
+            <span class="badge" style="font-size:0.75rem; margin-bottom:0.4rem;">Class XII & XI</span>
+            <h4 style="font-size:1.1rem;">Higher Secondary Certificate (HSC)</h4>
+            <p style="font-size:0.88rem; color:var(--text-secondary);">Mani Higher Secondary School, Coimbatore</p>
+            <div style="font-size:0.85rem; color:var(--accent-primary); font-weight:700; margin-top:0.4rem;">Secured 71.5% in HSC II & 72% in HSC I</div>
+          </div>
+          <div class="glass-card">
+            <span class="badge" style="font-size:0.75rem; margin-bottom:0.4rem;">Class X</span>
+            <h4 style="font-size:1.1rem;">SSLC Certificate</h4>
+            <p style="font-size:0.88rem; color:var(--text-secondary);">Mani Higher Secondary School, Coimbatore (77.2%)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERNSHIPS TIMELINE -->
+  <section id="experience" class="section-padding" style="background:var(--bg-secondary);">
+    <div class="container">
+      <div class="section-title-wrapper">
+        <span class="section-subtitle">Work History & Leadership</span>
+        <h2 class="section-title">Internship Experience</h2>
+      </div>
+      <div style="max-width:880px; margin:0 auto; display:flex; flex-direction:column; gap:1.75rem;">
+        
+        <div class="glass-card" style="border-left:4px solid var(--accent-primary);">
+          <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.5rem;">
+            <div>
+              <h3 style="font-size:1.3rem;">IndiWebPros – AIML Engineer Intern & Team Leader</h3>
+              <div style="font-size:0.95rem; color:var(--accent-primary); font-weight:700;">Remote</div>
+            </div>
+            <span class="badge">June 2026 – August 2026</span>
+          </div>
+          <p style="font-size:0.85rem; color:var(--accent-cyan); font-weight:700; margin-bottom:0.5rem;">Skills Gained: Python, NLP, Computer Vision, Business Intelligence, Team Leadership</p>
+          <ul style="padding-left:1.2rem; color:var(--text-secondary); font-size:0.92rem; line-height:1.7;">
+            <li>Leading an AI/ML engineering team to develop Python-based machine learning solutions.</li>
+            <li>Integrated NLP, forecasting, and customer analytics modules into a unified business intelligence platform.</li>
+            <li>Built an AI-driven platform for healthcare analytics and decision support.</li>
+            <li>Implemented computer vision techniques using OpenCV to improve object detection accuracy.</li>
+          </ul>
+        </div>
+
+        <div class="glass-card">
+          <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.5rem;">
+            <div>
+              <h3 style="font-size:1.3rem;">KMCH – Information Technology Intern</h3>
+              <div style="font-size:0.95rem; color:var(--accent-primary); font-weight:700;">Kovai Medical Center and Hospital, Coimbatore</div>
+            </div>
+            <span class="badge">May 2026</span>
+          </div>
+          <p style="font-size:0.85rem; color:var(--accent-cyan); font-weight:700; margin-bottom:0.5rem;">Skills Gained: OpenCV, Healthcare Analytics, Image Processing, IT Infrastructure</p>
+          <ul style="padding-left:1.2rem; color:var(--text-secondary); font-size:0.92rem; line-height:1.7;">
+            <li>Implemented computer vision techniques using OpenCV and NumPy to improve object detection accuracy.</li>
+            <li>Supported hospital IT operations, digital workflows, system administration, and healthcare data management.</li>
+          </ul>
+        </div>
+
+        <div class="glass-card">
+          <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.5rem;">
+            <div>
+              <h3 style="font-size:1.3rem;">CodSoft – Machine Learning Intern</h3>
+              <div style="font-size:0.95rem; color:var(--accent-primary); font-weight:700;">Remote</div>
+            </div>
+            <span class="badge">March 2026 – April 2026</span>
+          </div>
+          <p style="font-size:0.85rem; color:var(--accent-cyan); font-weight:700; margin-bottom:0.5rem;">Skills Gained: NLP, Document AI, Data Preprocessing, Scikit-Learn</p>
+          <ul style="padding-left:1.2rem; color:var(--text-secondary); font-size:0.92rem; line-height:1.7;">
+            <li>Developed a Document Intelligence System leveraging Natural Language Processing (NLP) and Document AI algorithms.</li>
+            <li>Applied Python, Pandas, and Scikit-learn to automate text classification, information extraction, and preprocessing.</li>
+          </ul>
+        </div>
+
+        <div class="glass-card">
+          <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.5rem;">
+            <div>
+              <h3 style="font-size:1.3rem;">Prodigy InfoTech – Machine Learning Intern</h3>
+              <div style="font-size:0.95rem; color:var(--accent-primary); font-weight:700;">Coimbatore</div>
+            </div>
+            <span class="badge">Dec 2025 – Jan 2026</span>
+          </div>
+          <p style="font-size:0.85rem; color:var(--accent-cyan); font-weight:700; margin-bottom:0.5rem;">Skills Gained: SpaCy, ARIMA Forecasting, Business Intelligence, Python</p>
+          <ul style="padding-left:1.2rem; color:var(--text-secondary); font-size:0.92rem; line-height:1.7;">
+            <li>Developed an Enterprise AI Business Intelligence & Analytics Platform using Python, Scikit-learn, SpaCy, and ARIMA.</li>
+            <li>Implemented time-series forecasting and NLP text analytics to deliver real-time business intelligence metrics.</li>
+          </ul>
+        </div>
+
+        <div class="glass-card">
+          <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.5rem;">
+            <div>
+              <h3 style="font-size:1.3rem;">Infosys Springboard – AI First Internship</h3>
+              <div style="font-size:0.95rem; color:var(--accent-primary); font-weight:700;">Remote / Hybrid</div>
+            </div>
+            <span class="badge">Specialized AI Training</span>
+          </div>
+          <p style="font-size:0.85rem; color:var(--accent-cyan); font-weight:700; margin-bottom:0.5rem;">Skills Gained: Generative AI, Prompt Engineering, Neural Networks, AI Architecture</p>
+          <ul style="padding-left:1.2rem; color:var(--text-secondary); font-size:0.92rem; line-height:1.7;">
+            <li>Completed intensive AI First training covering Generative AI models, prompt engineering, and deep learning architectures.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS SECTION (BELOW INTERNSHIPS, ABOVE CONTACT) -->
+  <section id="certifications" class="section-padding">
+    <div class="container">
+      <div class="section-title-wrapper">
+        <span class="section-subtitle">Verified Diplomas & Credentials</span>
+        <h2 class="section-title">Certifications & Credentials</h2>
+      </div>
+
+      <div id="cert-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(310px, 1fr)); gap:1.75rem;">
+        
+        <!-- Rendered dynamically by script for all 24 image files in public/assets/certificates/ -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED PROJECTS -->
+  <section id="featured-projects" class="section-padding" style="background:var(--bg-secondary);">
+    <div class="container">
+      <div class="section-title-wrapper">
+        <span class="section-subtitle">Flagship Architecture</span>
+        <h2 class="section-title">Featured Projects</h2>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:2rem;">
+        
+        <div class="glass-card">
+          <span class="badge" style="margin-bottom:0.75rem;">AI Platform</span>
+          <h3 style="font-size:1.35rem; margin-bottom:0.5rem;">Enterprise AI Platform</h3>
+          <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:1rem;">Integrated NLP, forecasting, and customer analytics into a unified business intelligence platform.</p>
+          <div style="font-size:0.8rem; color:var(--accent-primary); font-weight:700; margin-bottom:1.25rem;">Tech: Python, SpaCy, Scikit-learn, ARIMA, React</div>
+          <a href="https://github.com/arthi1217/Enterprise_AI_Platform" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width:100%; font-size:0.85rem;">View Repository ↗</a>
+        </div>
+
+        <div class="glass-card">
+          <span class="badge" style="margin-bottom:0.75rem;">Healthcare AI</span>
+          <h3 style="font-size:1.35rem; margin-bottom:0.5rem;">MedIntel: Hospital Analytics</h3>
+          <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:1rem;">AI-powered hospital analytics and clinical decision support system for predictive healthcare management.</p>
+          <div style="font-size:0.8rem; color:var(--accent-primary); font-weight:700; margin-bottom:1.25rem;">Tech: Python, Machine Learning, Pandas, NumPy</div>
+          <a href="https://github.com/arthi1217/MedIntel" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width:100%; font-size:0.85rem;">View Repository ↗</a>
+        </div>
+
+        <div class="glass-card">
+          <span class="badge" style="margin-bottom:0.75rem;">NLP / Document AI</span>
+          <h3 style="font-size:1.35rem; margin-bottom:0.5rem;">Document Intelligence System</h3>
+          <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:1rem;">Intelligent document processing system analyzing unstructured text and automating classification.</p>
+          <div style="font-size:0.8rem; color:var(--accent-primary); font-weight:700; margin-bottom:1.25rem;">Tech: Python, NLP, Pandas, Scikit-learn</div>
+          <a href="https://github.com/arthi1217/Document-Intelligence-System" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width:100%; font-size:0.85rem;">View Repository ↗</a>
+        </div>
+
+        <div class="glass-card">
+          <span class="badge" style="margin-bottom:0.75rem;">Computer Vision</span>
+          <h3 style="font-size:1.35rem; margin-bottom:0.5rem;">Image Segmentation IoU</h3>
+          <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:1rem;">Computer vision pipeline implementing Intersection over Union (IoU) evaluation metrics for image segmentation.</p>
+          <div style="font-size:0.8rem; color:var(--accent-primary); font-weight:700; margin-bottom:1.25rem;">Tech: Python, OpenCV, NumPy, Segmentation</div>
+          <a href="https://github.com/arthi1217/Image-Segmentation-IoU" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width:100%; font-size:0.85rem;">View Repository ↗</a>
+        </div>
+
+        <div class="glass-card">
+          <span class="badge" style="margin-bottom:0.75rem;">Computer Vision</span>
+          <h3 style="font-size:1.35rem; margin-bottom:0.5rem;">OpenCV Object Detection</h3>
+          <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:1rem;">Real-time object detection and spatial processing system utilizing computer vision edge algorithms.</p>
+          <div style="font-size:0.8rem; color:var(--accent-primary); font-weight:700; margin-bottom:1.25rem;">Tech: Python, OpenCV, NumPy</div>
+          <a href="https://github.com/arthi1217/OpenCV-Object-Detection" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width:100%; font-size:0.85rem;">View Repository ↗</a>
+        </div>
+
+        <div class="glass-card">
+          <span class="badge" style="margin-bottom:0.75rem;">Image Processing</span>
+          <h3 style="font-size:1.35rem; margin-bottom:0.5rem;">Image Pre-Processing Project</h3>
+          <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:1rem;">Automated computer vision pre-processing suite for noise reduction, thresholding, and matrix enhancement.</p>
+          <div style="font-size:0.8rem; color:var(--accent-primary); font-weight:700; margin-bottom:1.25rem;">Tech: Python, OpenCV, Image Processing</div>
+          <a href="https://github.com/rathimuskan28-sketch/image-pre-processing-project" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width:100%; font-size:0.85rem;">View Repository ↗</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE ML SIMULATOR SANDBOX -->
+  <section id="sandbox" class="section-padding">
+    <div class="container">
+      <div class="section-title-wrapper">
+        <span class="section-subtitle">Interactive AI Playground</span>
+        <h2 class="section-title">Live ML Model Simulator</h2>
+      </div>
+      <div class="glass-card" style="max-width:880px; margin:0 auto; padding:2.5rem; border:1px solid var(--border-glow); box-shadow:var(--shadow-glow);">
+        <h3 style="font-size:1.3rem; margin-bottom:1.5rem; text-align:center;">🏡 House Price Valuation Simulator</h3>
+        <div class="sandbox-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; align-items:center;">
+          <div style="display:flex; flex-direction:column; gap:1.25rem;">
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:0.88rem; margin-bottom:0.3rem;">
+                <span>Square Footage</span><strong id="sqft-val" style="color:var(--accent-primary)">1800 sq.ft</strong>
+              </div>
+              <input type="range" id="sqft-slider" min="800" max="4000" step="50" value="1800" style="width:100%; accent-color:var(--accent-primary);">
+            </div>
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:0.88rem; margin-bottom:0.3rem;">
+                <span>Bedrooms</span><strong id="bed-val" style="color:var(--accent-primary)">3 BHK</strong>
+              </div>
+              <input type="range" id="bed-slider" min="1" max="5" value="3" style="width:100%; accent-color:var(--accent-primary);">
+            </div>
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:0.88rem; margin-bottom:0.3rem;">
+                <span>Location Quality</span><strong id="loc-val" style="color:var(--accent-primary)">8/10</strong>
+              </div>
+              <input type="range" id="loc-slider" min="1" max="10" value="8" style="width:100%; accent-color:var(--accent-primary);">
+            </div>
+          </div>
+
+          <div style="background:rgba(0,0,0,0.3); padding:2rem; border-radius:var(--radius-lg); text-align:center; border:1px solid var(--border-color);">
+            <div style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:0.5rem;">Estimated Market Valuation</div>
+            <div id="price-output" class="gradient-text" style="font-size:2.8rem; font-weight:800;">$424,000</div>
+            <div style="font-size:0.8rem; color:var(--text-muted); margin-top:0.75rem;">Real-time Scikit-learn regression model output</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT & SOCIAL LINKS -->
+  <section id="contact" class="section-padding" style="background:var(--bg-secondary);">
+    <div class="container">
+      <div class="section-title-wrapper">
+        <span class="section-subtitle">Get In Touch</span>
+        <h2 class="section-title">Contact Information</h2>
+      </div>
+      <div class="contact-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:2.5rem;">
+        <div class="glass-card">
+          <h3 style="font-size:1.3rem; margin-bottom:1.25rem;">Direct Channels & Official Links</h3>
+          <p style="margin-bottom:0.75rem;">📍 <strong>Address:</strong> Coimbatore, Tamil Nadu, India</p>
+          <p style="margin-bottom:0.75rem;">📞 <strong>Mobile:</strong> +91 7550063086</p>
+          <p style="margin-bottom:1rem;">✉️ <strong>Email:</strong> arthiramesh17507@gmail.com</p>
+          
+          <div style="display:flex; gap:0.75rem; margin-bottom:1.5rem;">
+            <a href="https://linkedin.com/in/arthi1757" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="flex:1; padding:0.65rem 1rem; font-size:0.85rem;">LinkedIn Profile ↗</a>
+            <a href="https://github.com/arthi1217" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="flex:1; padding:0.65rem 1rem; font-size:0.85rem;">GitHub Profile ↗</a>
+          </div>
+
+          <button onclick="openModal('resume-modal')" class="btn btn-primary" style="width:100%;">View & Print Resume</button>
+        </div>
+
+        <div class="glass-card">
+          <h3 style="font-size:1.3rem; margin-bottom:1.25rem;">Send a Direct Message</h3>
+          <form onsubmit="alert('Message sent successfully to Arthi R!'); return false;" style="display:flex; flex-direction:column; gap:1rem;">
+            <input type="text" placeholder="Your Name" required style="padding:0.75rem; border-radius:8px; border:1px solid var(--border-color); background:rgba(0,0,0,0.25); color:#fff;">
+            <input type="email" placeholder="Your Email" required style="padding:0.75rem; border-radius:8px; border:1px solid var(--border-color); background:rgba(0,0,0,0.25); color:#fff;">
+            <textarea rows="4" placeholder="Your Message" required style="padding:0.75rem; border-radius:8px; border:1px solid var(--border-color); background:rgba(0,0,0,0.25); color:#fff;"></textarea>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESUME MODAL -->
+  <div id="resume-modal" class="modal-overlay" onclick="closeModal('resume-modal')">
+    <div class="glass-card" onclick="event.stopPropagation()" style="background:#fff; color:#0f172a; max-width:750px; width:100%; max-height:85vh; overflow-y:auto; padding:2rem;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; border-bottom:2px solid #e2e8f0; padding-bottom:0.5rem;">
+        <h2>ARTHI R</h2>
+        <button onclick="closeModal('resume-modal')" style="font-size:1.2rem; cursor:pointer;">✖</button>
+      </div>
+      <div style="font-size:0.9rem; line-height:1.6;">
+        <p><strong>Contact:</strong> +91 7550063086 | arthiramesh17507@gmail.com | Coimbatore, Tamil Nadu</p>
+        <p><strong>LinkedIn:</strong> linkedin.com/in/arthi1757 | <strong>GitHub:</strong> github.com/arthi1217</p>
+        <hr style="margin:1rem 0;">
+        <h4>CAREER OBJECTIVE</h4>
+        <p>Aspiring AI/ML Developer with a strong foundation in Artificial Intelligence, Machine Learning, Deep Learning, Python, Data Science, and SQL.</p>
+        <hr style="margin:1rem 0;">
+        <h4>DECLARATION</h4>
+        <p>I hereby declare that the information provided in this resume is true and accurate to the best of my knowledge and belief.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Theme Switcher
+    const themeSelector = document.getElementById('theme-selector');
+    themeSelector.addEventListener('change', (e) => {
+      document.documentElement.setAttribute('data-theme', e.target.value);
+    });
+
+    // Modals
+    function openModal(id) { document.getElementById(id).classList.add('active'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+    // Source of truth certificate image list directly from folder public/assets/certificates/
+    const rawImageFiles = [
+      "Artificial Intelligence.jpg",
+      "Codesoft internship completion.jpg",
+      "Computer vision 101.jpg",
+      "Curtain universiy workshop.jpg",
+      "Generative models for developers.jpg",
+      "Guvi's Hcl participation.jpg",
+      "IBM's AI LIteracy.jpg",
+      "IBM's Communcating the data story.jpg",
+      "IBM's Data Fundamentals.jpg",
+      "IBM's Importance of DV.jpg",
+      "Infosys open ai gpt model.jpg",
+      "Intro Data science.jpg",
+      "Intro NLP.jpg",
+      "Intro to deeplearning.jpg",
+      "Introduction of Robotic Automation.jpg",
+      "Mangodb for beginners.jpg",
+      "Novitech_ fullstack.jpg",
+      "Paper presenattion win 2 prize.jpg",
+      "Prodigy offer letter for internship.jpg",
+      "Top and conssitent performer.jpg",
+      "Top perfomer.jpg",
+      "Training certificate from ebox for c.jpg",
+      "attended srcw ai and robotics and its application.jpg",
+      "codsoft-offer letter.jpg"
+    ];
+
+    const pdfMap = {
+      "Codesoft internship completion.jpg": "codsoft-internship.pdf",
+      "codsoft-offer letter.jpg": "codsoft-internship.pdf",
+      "IBM's AI LIteracy.jpg": "ibm-skillsbuild.pdf",
+      "IBM's Communcating the data story.jpg": "ibm-skillsbuild.pdf",
+      "IBM's Data Fundamentals.jpg": "ibm-skillsbuild.pdf",
+      "IBM's Importance of DV.jpg": "ibm-skillsbuild.pdf",
+      "Infosys open ai gpt model.jpg": "infosys-ai-first.pdf",
+      "Prodigy offer letter for internship.jpg": "prodigy-internship.pdf"
+    };
+
+    function renderCertificates() {
+      const grid = document.getElementById('cert-grid');
+      grid.innerHTML = '';
+
+      rawImageFiles.forEach(imgFile => {
+        const titleWithoutExt = imgFile.substring(0, imgFile.lastIndexOf('.'));
+        const displayTitle = titleWithoutExt || "Certification";
+        const encodedImagePath = `./assets/certificates/${encodeURIComponent(imgFile)}`;
+        
+        const matchingPdf = pdfMap[imgFile];
+        const downloadPath = matchingPdf ? `./assets/certificates/${matchingPdf}` : encodedImagePath;
+        const downloadName = matchingPdf || imgFile;
+
+        const card = document.createElement('div');
+        card.className = 'glass-card cert-item';
+        card.innerHTML = `
+          <span class="badge" style="margin-bottom:0.75rem;">Verified Certificate</span>
+          <div style="position:relative; width:100%; height:185px; border-radius:var(--radius-md); overflow:hidden; cursor:pointer; margin-bottom:1rem; border:1px solid var(--border-color); background:rgba(0,0,0,0.3);" onclick="window.open('${encodedImagePath}', '_blank')">
+            <img src="${encodedImagePath}" alt="${displayTitle}" loading="lazy" style="width:100%; height:100%; object-fit:cover; transition:transform 0.3s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+            <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.75) 100%); display:flex; align-items:flex-end; padding:0.6rem; color:#fff; font-size:0.75rem; font-weight:700;">👁️ Click to Enlarge</div>
+          </div>
+          <h3 style="font-size:1.2rem; margin-bottom:0.3rem;">${displayTitle}</h3>
+          <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">Source: /assets/certificates/${imgFile}</p>
+          <div style="display:flex; gap:0.5rem;">
+            <button onclick="window.open('${encodedImagePath}', '_blank')" class="btn btn-primary" style="flex:1; padding:0.55rem; font-size:0.8rem;">View Certificate</button>
+            <a href="${downloadPath}" download="${downloadName}" class="btn btn-outline" style="padding:0.55rem; font-size:0.8rem;">Download</a>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Render certificates
+    renderCertificates();
+
+    // Typing Effect
+    const roles = [
+      "AI/ML Engineer & Developer",
+      "Data Science Specialist",
+      "Computer Vision Architect",
+      "Healthcare AI Specialist"
+    ];
+    let roleIdx = 0, charIdx = 0, isDel = false;
+    const typingEl = document.getElementById('typing-text');
+
+    function typeLoop() {
+      const currentRole = roles[roleIdx];
+      if (!isDel) {
+        typingEl.innerText = currentRole.substring(0, charIdx + 1);
+        charIdx++;
+        if (charIdx === currentRole.length) {
+          isDel = true;
+          setTimeout(typeLoop, 1600);
+          return;
+        }
+      } else {
+        typingEl.innerText = currentRole.substring(0, charIdx - 1);
+        charIdx--;
+        if (charIdx === 0) {
+          isDel = false;
+          roleIdx = (roleIdx + 1) % roles.length;
+        }
+      }
+      setTimeout(typeLoop, isDel ? 40 : 80);
+    }
+    typeLoop();
+
+    // Canvas Background
+    const canvas = document.getElementById('hero-canvas');
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = canvas.parentElement.offsetWidth;
+    let height = canvas.height = canvas.parentElement.offsetHeight;
+
+    const nodes = [];
+    for (let i = 0; i < 45; i++) {
+      nodes.push({
+        x: Math.random() * width, y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.7, vy: (Math.random() - 0.5) * 0.7,
+        r: Math.random() * 2.5 + 1.2
+      });
+    }
+
+    function drawCanvas() {
+      ctx.clearRect(0,0,width,height);
+      for(let i=0; i<nodes.length; i++) {
+        for(let j=i+1; j<nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          if (dist < 130) {
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.strokeStyle = `rgba(236, 72, 153, ${0.28 * (1 - dist/130)})`;
+            ctx.stroke();
+          }
+        }
+      }
+      nodes.forEach(n => {
+        n.x += n.vx; n.y += n.vy;
+        if(n.x<0 || n.x>width) n.vx*=-1;
+        if(n.y<0 || n.y>height) n.vy*=-1;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
+        ctx.fillStyle = '#ec4899';
+        ctx.fill();
+      });
+      requestAnimationFrame(drawCanvas);
+    }
+    drawCanvas();
+
+    // ML Sandbox Sliders logic
+    const sqftS = document.getElementById('sqft-slider');
+    const bedS = document.getElementById('bed-slider');
+    const locS = document.getElementById('loc-slider');
+    const priceO = document.getElementById('price-output');
+
+    function updatePrice() {
+      const sqft = parseInt(sqftS.value);
+      const bed = parseInt(bedS.value);
+      const loc = parseInt(locS.value);
+
+      document.getElementById('sqft-val').innerText = sqft + ' sq.ft';
+      document.getElementById('bed-val').innerText = bed + ' BHK';
+      document.getElementById('loc-val').innerText = loc + '/10';
+
+      const price = 100000 + (sqft * 165) + (bed * 28000) + (loc * 22000);
+      priceO.innerText = '$' + price.toLocaleString();
+    }
+
+    [sqftS, bedS, locS].forEach(s => s.addEventListener('input', updatePrice));
+  </script>
+</body>
+</html>
